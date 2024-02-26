@@ -1,0 +1,342 @@
+<!doctype html>
+
+<head>
+  <script src="https://distill.pub/template.v2.js"></script>
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script> -->
+
+  <script src="scripts/control.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style type="text/css">
+      tr, td {
+        padding: 0;
+      }
+
+      table {
+            width: 100%; /* Ensure the table fills the width of its container */
+            border-collapse: collapse;
+      }
+
+      .tooltip {
+          position: relative;
+          display: inline-block;
+          border-bottom: 1px dotted black; /* Optional: adds underline to indicate it's hoverable */
+        }
+
+        .min-max-width {
+            min-width: 100px; /* Minimum width */
+            max-width: 95%; /* A trick to make the column fill the remaining space */
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+
+        .min-max-width-master {
+            min-width: 220px; /* Minimum width */
+            max-width: 90%; /* A trick to make the column fill the remaining space */
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+
+        .equalDivide tr td { width:50%; }
+
+        .tooltip .tooltiptext {
+          visibility: hidden;
+          width: 120px;
+          background-color: black;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px 0;
+
+          /* Position the tooltip */
+          position: absolute;
+          z-index: 1;
+          top: 100%;
+          left: 50%;
+          margin-left: -60px;
+        }
+
+        .tooltip:hover .tooltiptext {
+          visibility: visible;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .image {
+            margin: 0 10px; /* Adjust spacing between images */
+        }
+
+        .image img {
+            width: 100%; /* Adjust image width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .caption {
+            text-align: center;
+        }
+
+        .floating_text {
+          position: absolute;
+          top: 1545px;
+          left: 440px;
+          /* z-index: 1; */
+        }
+
+
+        .emotion_project {
+            width:100%; 
+            position:absolute;
+          }
+
+          .emotion_project_last {
+            width:100%; 
+          }
+        .other-column {
+          min-width:110px;
+          width: 50%;
+        }
+
+        @media (max-width: 1px) {
+          .emotion_project {
+            width:200px; 
+            position:absolute;
+          }
+
+          .emotion_project_last {
+            width:200px; 
+          }
+
+          .other-column {
+            min-width:210px;
+          }
+        }
+
+        .container {
+          width: 100%; /* Example: makes the container 50% of the width of its parent */
+          padding: 5px; /* Adds some space inside the container */
+        }
+
+  </style>
+</head>
+
+<body>
+
+    <!-- Section: Front Matter -->
+    <d-front-matter>
+        <script type="text/json">{
+        "title": "Daisy-TTS",
+        "description": "Simulating Wider Spectrum of Emotions\\via Prosody Embedding Decomposition",
+        "authors": [
+          {
+            "author":"Rendi Chevi",
+            "authorURL":"",
+            "affiliation":"MBZUAI",
+            "affiliationURL":"https://mbzuai.ac.ae/"
+          },
+          {
+            "author":"Alham Fikri Aji",
+            "authorURL":"",
+            "affiliation":"MBZUAI",
+            "affiliationURL":"https://mbzuai.ac.ae/"
+          }
+        ]
+        }</script>
+    </d-front-matter>
+
+    <!-- Section: Title -->
+    <d-title>
+        <h1 id="title_h1"><img style="width:65px;height:65px;" src="assets/logo/daisy-tts-logo.png">   Daisy-TTS</h1>
+        <p>Simulating Wider Spectrum of Emotions via Prosody Embedding Decomposition</p>
+    </d-title>
+    <d-byline></d-byline>
+
+    <d-article>
+
+    <!-- Section: Introduction -->
+    <h2>Introduction</h2>
+    <p>
+        We introduce Daisy-TTS, and emotional text-to-speech design, grounded on the structural model of emotions <d-cite key="plutchik1984emotions"></d-cite>, to simulate wide spectrum of emotion through learning emotionally-separable prosody embeddings.
+    </p>
+
+    <p>
+    Through learning and decomposing the learned embeddings, Daisy-TTS capable of simulating:
+    <ul>
+        <li><b>Primary Emotions</b>, as learned from the training samples, e.g. <i>joy</i>, <i>sadness</i>, <i>anger</i>.</li>
+        <li><b>Secondary Emotions</b>, as a mixture of primary emotions, e.g. <i>envy</i> = <i>sadness</i> + <i>anger</i>.</li>
+        <li><b>Intensity-level</b>, by scaling the emotion embedding, e.g. <i>rage</i> = 2 * <i>anger</i>. </li>
+        <li><b>Emotions Polarity</b>, by negating the emotion embedding, e.g. <i>sadness</i> = - <i>joy</i>.</li>
+    </ul>
+    </p>
+    
+    <div class="image-container">
+        <div class="image">
+            <img src="assets/smoe-daisy.png">
+            <p class="caption">(<b>Left</b>) Structural Model of Emotions. (<b>Right</b>) Emotionally-separable prosody embeddings learned by Daisy-TTS.</p>
+        </div>
+    </div>
+
+    <!-- Section: Emotion Simulation -->
+    <h2>Simulating Emotions</h2>
+
+    <p>
+        Below we can listen to emotional speech simulated by Daisy-TTS, with algorithm described in Section 3 of the paper. We can simulate a primary emotion, or secondary emotion by mixing the primary ones, and simulate its intensity and polarity.
+    </p>
+
+    <!-- <div id="emotion-simulation-sketcsssh">
+      <script src="emotion-simulation/sketch.js"></script>
+    </div> -->
+
+    <table>
+      <thead>
+        <tr>
+          <th scope="col"> </th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="other-column">
+              <div style="position:relative">
+                <img id="img_anger" style="opacity:0.25" src="emotion-simulation/assets/embedding-space/space-anger-v3.png" class="emotion_project">
+              </div>
+
+              <div style="position:relative">
+                <img id="img_joy" style="opacity:0.25" src="emotion-simulation/assets/embedding-space/space-joy-v3.png" class="emotion_project">
+              </div>
+
+              <div style="position:relative">
+                <img id="img_sadness" style="opacity:0.99" src="emotion-simulation/assets/embedding-space/space-sadness-v3.png" class="emotion_project">
+              </div>
+
+              <div style="position:relative">
+                <img id="img_surprise" style="opacity:0.25" src="emotion-simulation/assets/embedding-space/space-surprise-v3.png" class="emotion_project">
+              </div>
+
+              <div style="position:relative">
+                <img id="img_bittersweetness" style="opacity:0.25" src="emotion-simulation/assets/embedding-space/space-bittersweetness-v3.png" class="emotion_project">
+              </div>
+
+              <div style="position:relative">
+                <img id="img_delight" style="opacity:0.25" src="emotion-simulation/assets/embedding-space/space-delight-v3.png" class="emotion_project">
+              </div>
+
+              <div style="position:relative">
+                <img id="img_outrage" style="opacity:0.25" src="emotion-simulation/assets/embedding-space/space-outrage-v3.png" class="emotion_project">
+              </div>
+            
+              <div style="position:relative">
+                <img id="img_pride" style="opacity:0.25" src="emotion-simulation/assets/embedding-space/space-pride-v3.png" class="emotion_project">
+              </div>
+
+              <div style="position:relative">
+                <img id="img_envy" style="opacity:0.25" src="emotion-simulation/assets/embedding-space/space-envy-v3.png" class="emotion_project">
+                <img id="img_disappointment" style="opacity:0.25" src="emotion-simulation/assets/embedding-space/space-disappointment-v3.png" class="emotion_project_last">
+              </div>
+          </td>
+          <td class=".min-max-width-master">
+            <div>
+                <table class="equalDivide">
+                  <tbody>
+                    <tr>
+                      <td class="min-max-width">
+                        <select class="form-select" id="emotionSelectA" onchange="emotionChange()">
+                          <option value="sadness">Sadness</option>
+                          <option value="anger">Anger</option>
+                          <option value="joy">Joy</option>
+                          <option value="surprise">Surprise</option>
+                      </select>
+                      </td>
+                      <td class="min-max-width">
+                        <select class="form-select" id="emotionSelectB" onchange="emotionChange()">
+                          <option value="sadness">Sadness</option>
+                          <option value="anger">Anger</option>
+                          <option value="joy">Joy</option>
+                          <option value="surprise">Surprise</option>
+                      </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span style="font-size:10px">Result: </span> <span id="emotion" style="font-size:16px; color:#1a66b2"><b>Sadness</b></span>
+                      </td>
+
+                      <td>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="emotionChange()">
+                          <label class="form-check-label" for="flexSwitchCheckDefault">Polarize</label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table>
+                  
+                  <tr>
+                      <td>
+                        Intensity
+                      </td>
+                      <td>
+                        <input class="form-range" type="range" id="weight" min="0.25" value="1.75" max="1.75" step="0.75" list="intensity" onchange="emotionChange()">
+                        <datalist id="intensity">
+                          <option>0.25</option>
+                          <option>1.00</option>
+                          <option>1.75</option>
+                        </datalist>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Speaker</td>
+                      <td>
+                        <select id="spk" class="form-select" id="speaker" onchange="emotionChange()">
+                          <option value="0019">0019</option>
+                          <option value="0016">0016</option>
+                          <option value="0013">0013</option>
+                          <option value="0020">0020</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Text</td>
+                      <td>
+                        <select id="txt" class="form-select" id="text" onchange="emotionChange()">
+                          <option value=1>Oh my god, what are the chances.</option>
+                          <option value=2>How do you know this.</option>
+                          <option value=7>Let me tell you something.</option>
+                          <option value=8>That's exactly what happened.</option>
+                          <option value=10>Again, overall, not just for me.</option>
+                        </select>
+                      </td>
+                    </tr>
+                </table>
+
+                Daisy-TTS:
+                <br>
+                <audio id="wave" controls class="container">
+                  <source src="emotion-simulation/assets/waves/model=rainbow-spk=0019-emo=sadness-s=1.75-txt=1.wav" type="audio/ogg">
+                </audio>
+
+                <br>
+                <span>Baseline <d-cite key="zhou2022speech"></d-cite>: </span> <span id="baseline-na-header" style="color:#d02466"><b></b></span>
+                <br>
+                <audio id="wave_baseline" controls class="container">
+                  <source src="emotion-simulation/assets/waves_baseline/model=cloud-spk=0019-emo=sadness-s=1.75-txt=1.wav" type="audio/ogg">
+                </audio>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+
+    <d-bibliography src="bibliography.bib"></d-bibliography>
+        
+    
+  </d-article>
+
+</body>
+

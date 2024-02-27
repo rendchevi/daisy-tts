@@ -1,6 +1,10 @@
 <!doctype html>
 
 <head>
+  <meta http-equiv='cache-control' content='no-cache'> 
+  <meta http-equiv='expires' content='0'> 
+  <meta http-equiv='pragma' content='no-cache'>
+  
   <script src="https://distill.pub/template.v2.js"></script>
 
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
@@ -262,7 +266,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <span style="font-size:10px">Result: </span> <span id="emotion" style="font-size:16px; color:#1a66b2"><b>Sadness</b></span>
+                        <span style="font-size:10px">Result: </span> <span id="emotion" style="font-size:14px; color:#1a66b2"><b>Sadness</b></span>
                       </td>
 
                       <td>
@@ -314,14 +318,14 @@
                     </tr>
                 </table>
 
-                Daisy-TTS:
+                <b>🌼 Daisy-TTS</b>:
                 <br>
                 <audio id="wave" controls class="container">
                   <source src="emotion-simulation/assets/waves/model=rainbow-spk=0019-emo=sadness-s=1.75-txt=1.wav" type="audio/ogg">
                 </audio>
 
                 <br>
-                <span>Baseline <d-cite key="zhou2022speech"></d-cite>: </span> <span id="baseline-na-header" style="color:#d02466"><b></b></span>
+                <span><b>💐 Baseline</b> <d-cite key="zhou2022speech"></d-cite>: </span> <span id="baseline-na-header" style="color:#d02466"><b></b></span>
                 <br>
                 <audio id="wave_baseline" controls class="container">
                   <source src="emotion-simulation/assets/waves_baseline/model=cloud-spk=0019-emo=sadness-s=1.75-txt=1.wav" type="audio/ogg">

@@ -2,6 +2,8 @@
 ### Simulating Wider Spectrum of Emotions via Prosody Embedding Decomposition
 _Rendi Chevi_, _Alham Fikri Aji_
 
+_MBZUAI_
+
 🌼 [Paper Link](https://arxiv.org/abs/2402.14523) |
 💐 [Project Page](https://rendchevi.github.io/daisy-tts) |
 🌱 Code Coming Soon!

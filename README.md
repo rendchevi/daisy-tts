@@ -6,7 +6,21 @@ _MBZUAI_
 
 🌼 [Paper Link](https://arxiv.org/abs/2402.14523) |
 💐 [Project Page](https://rendchevi.github.io/daisy-tts) |
-🌱 Code Coming Soon!
+
+---
+
+> [!NOTE]
+>
+> 💌 Hi everyone, I've received several messages about this project and its code over the years.
+> Unfortunately, I've decided to archive this project for good.
+>
+> My original plan was to improve upon the results in the paper and address some feedback before releasing the full code. Unfortunately, the idea just didn't end up working as well as I'd hoped.
+>
+> We lacked a sufficient dataset to really test the theory, and I also struggled to come up with more clever ideas on the modeling side.
+>
+> Since then, I've moved on to work in another subfield and not working on TTS anymore. As time went on, this project just got naturally archived.
+>
+> Truly sorry to disappoint anyone who was waiting for this. It would be really cool to see future work that tries (more successfully than me!) in simulating psychological theories of emotions.
 
 ---
 

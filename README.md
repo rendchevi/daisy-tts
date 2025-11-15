@@ -16,7 +16,7 @@ _MBZUAI_
 >
 > My original plan was to improve upon the results in the paper and address some feedback before releasing the full code. Unfortunately, the idea just didn't end up working as well as I'd hoped.
 >
-> We lacked a sufficient dataset to really test the theory and improve the results, and I also struggled to come up with more clever ideas on the modeling side.
+> We lacked a sufficient dataset to further test the theory and improve the results, and I also struggled to come up with more clever ideas on the modeling side.
 >
 > And since then, I've moved on to work in another subfield and not working on TTS anymore. As time went on, this project just got naturally archived.
 >
